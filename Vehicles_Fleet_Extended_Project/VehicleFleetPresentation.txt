@@ -1,0 +1,199 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Sun Dec 19 22:38:28 2021
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> CONNECT sys as sysdba;
+Enter password:
+Connected.
+SQL>
+SQL> DROP USER vehiclefleetdb CASCADE;
+
+User dropped.
+
+SQL>
+SQL> CREATE USER vehiclefleetdb IDENTIFIED BY 123;
+
+User created.
+
+SQL>
+SQL> GRANT CONNECT, RESOURCE TO vehiclefleetdb;
+
+Grant succeeded.
+
+SQL>
+SQL> GRANT ALL PRIVILEGES TO vehiclefleetdb;
+
+Grant succeeded.
+
+SQL>
+SQL> CONNECT vehiclefleetdb;
+Enter password:
+Connected.
+SQL>
+SQL> SET lines 150
+SQL> SET trimout on
+SQL> SET tab off
+SQL> Col dateofmanufacture format A20
+SQL> Col made format A20
+SQL> Col model format A20
+SQL>
+SQL> CREATE TABLE GasVehicle(
+  2  serialNumber NUMBER(10),
+  3  made VARCHAR2(20),
+  4  model VARCHAR2(20),
+  5  dateOfManufacture DATE,
+  6  tripCounter NUMBER(10),
+  7  fuelConsumed NUMBER(5,2)
+  8  );
+
+Table created.
+
+SQL>
+SQL> CREATE UNIQUE INDEX IDX_GasVehicle_serialNumber on GasVehicle(serialNumber);
+
+Index created.
+
+SQL>
+SQL> ALTER TABLE GasVehicle ADD CONSTRAINT PK_GasVehicle_serialNumber
+  2  Primary Key (serialNumber);
+
+Table altered.
+
+SQL>
+SQL> ALTER TABLE GasVehicle ADD CONSTRAINT CK_GasVehicle_serialNumber
+  2  CHECK(serialNumber IS NOT NULL AND serialNumber > 0);
+
+Table altered.
+
+SQL>
+SQL> ALTER TABLE GasVehicle ADD CONSTRAINT CK_GasVehicle_tripCounter
+  2  CHECK(tripCounter IS NOT NULL AND tripCounter > 0);
+
+Table altered.
+
+SQL>
+SQL> ALTER TABLE GasVehicle ADD CONSTRAINT CK_GasVehicle_fuelConsumed
+  2  CHECK(fuelConsumed IS NOT NULL AND fuelConsumed > 0);
+
+Table altered.
+
+SQL>
+SQL> CREATE TABLE ElecVehicle(
+  2  serialNumber NUMBER(10),
+  3  made VARCHAR2(20),
+  4  model VARCHAR2(20),
+  5  dateOfManufacture DATE,
+  6  tripCounter NUMBER(10),
+  7  kwPowerConsumed NUMBER(5,2)
+  8  );
+
+Table created.
+
+SQL>
+SQL> CREATE UNIQUE INDEX IDX_ElecVehicle_serialNumber on ElecVehicle(serialNumber);
+
+Index created.
+
+SQL>
+SQL> ALTER TABLE ElecVehicle ADD CONSTRAINT PK_ElecVehicle_serialNumber
+  2  Primary Key (serialNumber);
+
+Table altered.
+
+SQL>
+SQL> ALTER TABLE ElecVehicle ADD CONSTRAINT CK_ElecVehicle_serialNumber
+  2  CHECK(serialNumber IS NOT NULL AND serialNumber > 0);
+
+Table altered.
+
+SQL>
+SQL> ALTER TABLE ElecVehicle ADD CONSTRAINT CK_ElecVehicle_tripCounter
+  2  CHECK(tripCounter IS NOT NULL AND tripCounter > 0);
+
+Table altered.
+
+SQL>
+SQL> ALTER TABLE ElecVehicle ADD CONSTRAINT CK_ElecVehicle_kwPowerConsumed
+  2  CHECK(kwPowerConsumed IS NOT NULL AND kwPowerConsumed > 0);
+
+Table altered.
+
+SQL> Select table_name from user_tables;
+
+TABLE_NAME
+------------------------------
+GASVEHICLE
+ELECVEHICLE
+
+SQL> Desc GasVehicle
+ Name                                                                                Null?    Type
+ ----------------------------------------------------------------------------------- -------- --------------------------------------------------------
+ SERIALNUMBER                                                                        NOT NULL NUMBER(10)
+ MADE                                                                                         VARCHAR2(20)
+ MODEL                                                                                        VARCHAR2(20)
+ DATEOFMANUFACTURE                                                                            DATE
+ TRIPCOUNTER                                                                                  NUMBER(10)
+ FUELCONSUMED                                                                                 NUMBER(5,2)
+
+SQL> Desc ElecVehicle
+ Name                                                                                Null?    Type
+ ----------------------------------------------------------------------------------- -------- --------------------------------------------------------
+ SERIALNUMBER                                                                        NOT NULL NUMBER(10)
+ MADE                                                                                         VARCHAR2(20)
+ MODEL                                                                                        VARCHAR2(20)
+ DATEOFMANUFACTURE                                                                            DATE
+ TRIPCOUNTER                                                                                  NUMBER(10)
+ KWPOWERCONSUMED                                                                              NUMBER(5,2)
+
+SQL> Select * From GasVehicle;
+
+SERIALNUMBER MADE                 MODEL                DATEOFMANUFACTURE    TRIPCOUNTER FUELCONSUMED
+------------ -------------------- -------------------- -------------------- ----------- ------------
+        1111 Mitsubishi           Mirage               20-12-31                     359         9.21
+        1222 Kia                  Rio                  20-12-31                     428        11.89
+        1333 MINI                 Cooper               21-01-01                     360        11.61
+        1444 Honda                Fit                  20-12-31                     382        10.61
+        1555 Nissan               Versa                20-12-31                     324         10.8
+        1666 Toyota               Yaris                20-12-31                     406         11.6
+        1777 Chevrolet            Spark                21-01-01                     297            9
+        1888 Chrysler             Pacifica             20-12-31                     259        13.85
+        1999 Hyundai              Accent               21-01-01                     393         11.9
+       11111 Subaru               Impreza              21-01-01                     422        13.19
+       12222 Mazda                3                    19-12-31                     328          9.7
+
+SERIALNUMBER MADE                 MODEL                DATEOFMANUFACTURE    TRIPCOUNTER FUELCONSUMED
+------------ -------------------- -------------------- -------------------- ----------- ------------
+       13333 Acura                ILX                  21-01-01                     366        11.16
+       14444 Jaguar               FPace                17-12-31                     268          7.4
+       15555 Cadillac             Catera               99-12-31                     300        16.22
+       16666 MercedesBenz         CLA250               21-01-01                     392        13.52
+
+15 rows selected.
+
+SQL> Select * From ElecVehicle;
+
+SERIALNUMBER MADE                 MODEL                DATEOFMANUFACTURE    TRIPCOUNTER KWPOWERCONSUMED
+------------ -------------------- -------------------- -------------------- ----------- ---------------
+        2111 Volkswagen           ID4                  21-01-01                     250            2.58
+        2222 Nissan               Leaf                 21-01-01                     149            1.34
+        2333 Kandi                K27                  21-01-01                      59             .52
+        2444 Hyundai              IoniqElectric        20-12-31                     170            1.28
+        2555 BMW                  i3                   21-01-01                     153            1.35
+        2666 Tesla                X                    18-12-31                     190            2.13
+        2777 Porsche              TaycanTurbo          20-12-31                     201            2.91
+        2888 Lucid                Air                  22-02-02                     520            4.16
+        2999 Scion                iQEV                 13-12-31                      38             .31
+       21111 Chevrolet            BoltEV               19-12-31                     238               2
+       22222 Fiat                 500e                 15-12-31                      87             .75
+
+SERIALNUMBER MADE                 MODEL                DATEOFMANUFACTURE    TRIPCOUNTER KWPOWERCONSUMED
+------------ -------------------- -------------------- -------------------- ----------- ---------------
+       23333 BYD                  e6                   17-12-31                     187             2.6
+       24444 Polestar             2                    22-02-02                     270            2.52
+       25555 Rivian               R1S                  22-02-02                     316            4.58
+       26666 Audi                 etron                19-12-31                     204            2.76
+
+15 rows selected.
+
+SQL>

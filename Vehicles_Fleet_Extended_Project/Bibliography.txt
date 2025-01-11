@@ -1,0 +1,21 @@
+------ Bibliography ------
+
+Sources Consulted :
+
+https://www.kbb.com/car-make-model-list/new/view-all/
+https://www.kbb.com/car-make-model-list/used/
+https://www.motor1.com/features/228496/most-fuel-efficient-cars/
+https://www.caa.ca/sustainability/electric-vehicles/electric-vehicles-available-in-canada/
+https://vingenerator.org/brand
+https://www.consumerreports.org/cars/types/used/a-to-z
+https://en.wikipedia.org/wiki/List_of_production_battery_electric_vehicles
+https://www.motherearthnews.com/green-transportation/green-vehicles/miles-per-gallon-cars-zb0z11zblon
+https://www.caranddriver.com/features/g15382442/best-gas-mileage-nonhybrid-cars-gasoline-nonelectric/
+
+https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2020&year2=2022&mclass=Small+Cars&srchtyp=newMarket&pageno=1&rowLimit=50
+https://www.energuide.be/en/questions-answers/how-much-power-does-an-electric-car-use/212/
+https://www.fia.com/sites/default/files/2021_enecc_-_e-rally_regularity_cup_-_guidelines_for_energy_performance_index_calculation.pdf
+https://www.honestjohn.co.uk/real-mpg/
+https://www.edmunds.com/electric-car/
+https://www.fuelly.com/car
+https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=1984&year2=2022&vtype=Electric&pageno=1&rowLimit=50
